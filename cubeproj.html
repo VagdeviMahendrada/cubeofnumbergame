@@ -1,0 +1,89 @@
+<html>
+    <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cube a number</title>
+        <style>
+            body{
+                background-color:lightpink;
+            }
+            h1{
+                font-family: cursive;
+                margin-top: 50px;
+                text-align: center;
+            }
+            .form{
+                background-color:darkgray;
+                width: 500px;
+                height: 300px;
+                margin-top: 50px;
+                box-shadow:0 0 20px #7c7575;
+            }
+            .score{
+                text-align: right;
+                font-size: 22px;
+                color:white;
+            }
+            .ip{
+                display:block;
+                width:50%;
+                padding: 10px;
+            }
+            .ip::placeholder{
+                font-family: cursive;
+            }
+            #ques{
+                font-family: cursive;
+            }
+            .btn{
+                margin-top: 10px;
+                display: block;
+                width:30%;
+                height:30px;
+            }
+            .btn:hover {
+             filter: brightness(0.9);
+            }
+        </style>
+    </head>
+    <body>
+        <h1>CUBE GAME👍</h1>
+        <center><form class="form" id="form">
+            <h4 class="score" id="score">score: 0</h4>
+            <h1 id="ques">cube of 1=</h1>
+            <input type="text" class="ip" id="ip" placeholder="answer here" autofocus autocomplete="off">
+            <button type="submit" class="btn">Submit</button>
+        </form></center>
+        <script>
+            const n=Math.ceil(Math.random()*10);
+            const quesE=document.getElementById("ques");
+            const inputE=document.getElementById("ip");
+            const formE=document.getElementById("form");
+            const scoreE=document.getElementById("score");
+            let score=JSON.parse(localStorage.getItem("score"));
+            if(!score)
+            {
+                score=0;
+            }
+            scoreE.innerText=`score: ${score}`;
+            quesE.innerText=`cube of ${n}=`;
+            const ans=n*n*n;
+            formE.addEventListener("submit",()=>{
+                const userEntry=+inputE.value;
+                if(userEntry==ans)
+                {
+                    score++;
+                    scoreTostring();
+                }else{
+                    score--;
+                    scoreTostring();
+                }
+            });
+            function scoreTostring()
+            {
+                localStorage.setItem("score",JSON.stringify(score));
+            }
+        </script>
+    </body>
+</html>
